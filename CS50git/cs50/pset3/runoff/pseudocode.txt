@@ -1,0 +1,70 @@
+take for argv names of users
+
+// check if candidates are correctly added
+if argv < 2
+    remind usage
+    return 1;
+
+// Store number of candidates
+candidate_count = argc - 1;
+
+// Check if number of candidates is higher than maximum
+if candidate_count > maxcandidates
+    remind usage
+    return 2;
+
+// store candidates in candidates array
+for (int i = 0; i < candidate_count; i++)
+{
+    candidates[i].name = argv[i + 1];
+    candidates[i].votes = 0;
+}
+
+// Prompt user for number of voters
+int voters = get_int("Number of voters: ");
+
+// Check if numbers of voters is higher than maximum
+if (voters > maxvoters)
+{
+    remind usage;
+    return 3;
+}
+
+// Ask for votes and store them
+for (int j = 0; j < voters; j++)
+{
+    for (int k = 0; k < candidate_count; k++)
+    {
+        // Get user's vote and check if name is present in candidates
+        string name = get_string("vote: ");
+        if (!vote(j, k, name))
+        {
+            remind usage
+            return 4;
+        }
+    }
+}
+
+
+
+
+
+bool vote(int voter, int rank, string name)
+{
+    for (int i = 0; i < candidate_count; i++)
+    {
+        if (!strcmp(candidates[i].name, name))
+        {
+            preferences[voter][rank] = i;
+            return true;
+        }
+    }
+    return false;
+}
+
+void tabulate(void)
+{
+    // TODO
+    candidates[preferences[i][j]].votes ++;
+    return;
+}

@@ -1,0 +1,24 @@
+take for input no CLI
+    return 1;
+
+take for input string userInput
+
+initialize 3 integers, letters, words, and sentences
+
+in a while end of sentence loop
+
+    if (isalpha[i])
+        increment letters;
+    if ()
+        increment words;
+    if ()
+        increment sentences;
+
+fprintf(CLIndex(int letters, int words, int sentences));
+
+int CLIndex (int letters, int words, int sentences)
+
+    float l = ((int) l / (int) w) * 100;
+    float s = ((int) s / (int) w) * 100;
+
+    return 0.0588 * l - 0.296 * s - 15.8;

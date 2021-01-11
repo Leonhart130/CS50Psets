@@ -1,0 +1,22 @@
+take for argv[1] a key of 26 letters
+
+if argc != 2
+    remind Usage: ./substitution KEY
+    return 1;
+
+// Check key length
+int keyLength = strlen(argv[1]);
+if (keyLength != 26)
+    remind Usage: Key of 26 characters;
+    return 1;
+
+// Check
+for (int i = 0; i < keyLength; i++)
+{
+    if (!isalpha(argv[1]));
+    {
+        remind Usage;
+        return 1;
+    }
+}
+

@@ -1,0 +1,37 @@
+--- Users table and indices
+CREATE TABLE IF NOT EXISTS 'users' (
+    'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    'username' TEXT NOT NULL,
+    'hash' TEXT NOT NULL,
+    'cash' NUMERIC NOT NULL DEFAULT 10000.00
+    );
+CREATE TABLE sqlite_sequence(name,seq);
+CREATE UNIQUE INDEX 'username' ON "users" ("username");
+CREATE INDEX "users_index" ON "users" ("id");
+
+--- Users wallet table and indices
+CREATE TABLE IF NOT EXISTS 'wallet' (
+    'user_wallet' INTEGER NOT NULL,
+    'name' TEXT NOT NULL,
+    'wallet_symbol' TEXT NOT NULL,
+    'wallet_shares' INTEGER NOT NULL,
+    FOREIGN KEY(user_wallet) REFERENCES users(id),
+    FOREIGN KEY(user_wallet) REFERENCES history(user_history)
+    );
+CREATE INDEX "user_wallet" ON "wallet" ("user_wallet");
+CREATE INDEX "wallet_symbol" ON "wallet" ("wallet_symbol");
+CREATE INDEX "wallet_shares" ON "wallet" ("wallet_shares");
+
+--- Transactions history table and indices
+CREATE TABLE IF NOT EXISTS 'history' (
+    'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    'user_history' INTEGER NOT NULL,
+    'history_symbol' TEXT NOT NULL,
+    'history_shares' INTEGER NOT NULL,
+    'price' INTEGER NOT NULL,
+    'timestamp' DATETIME,
+    FOREIGN KEY(user_history) REFERENCES users(id),
+    FOREIGN KEY(user_history) REFERENCES wallet(user_wallet)
+    );
+CREATE UNIQUE INDEX "id" ON "history" ("id");
+CREATE INDEX "user_history" ON "history" ("user_history");

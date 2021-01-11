@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+<!-- Display personalized message depending on redirection -->
+{% block alert %}
+
+    <!-- If user just registered -->
+    {% if registered %}
+        <div class="alert alert-primary text-center" role="alert">
+            Registered!
+        </div>
+    {% endif %}
+
+    <!-- If second visit, and user has no stocks -->
+    {% if no_stocks %}
+        <div class="alert alert-primary text-center" role="alert">
+            No transactions yet
+        </div>
+    {% endif %}
+
+    <!-- If user just bought stocks -->
+    {% if bought %}
+        <div class="alert alert-primary text-center" role="alert">
+            Bought!
+        </div>
+    {% endif %}
+
+    <!-- If user just sold stocks -->
+    {% if sold %}
+        <div class="alert alert-primary text-center" role="alert">
+            Sold!
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block main %}
+    <!-- Display table with past transactions -->
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Symbol</th>
+            <th scope="col">Name</th>
+            <th scope="col">Shares</th>
+            <th scope="col">Price</th>
+            <th scope="col">TOTAL</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% if stocks %}
+            {% for stock in stocks %}
+            <tr>
+                <td>{{ stock["wallet_symbol"] }}</td>
+                <td>{{ stock["name"] }}</td>
+                <td>{{ stock["wallet_shares"] }}</td>
+                <td>{{ stock["price"] | usd }}</td>
+                <td>{{ stock["total"] | usd }}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td>CASH</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>{{ current_cash | usd }}</td>
+            </tr>
+        {% endif %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th>{{ total_holding | usd }}</th>
+            </tr>
+        </tfoot>
+      </table>
+{% endblock %}

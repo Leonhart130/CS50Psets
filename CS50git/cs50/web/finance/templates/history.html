@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+<!-- Display alert if user has no transaction yet -->
+{% block alert %}
+    {% if not history %}
+    <div class="alert alert-primary text-center" role="alert">
+        No transactions yet
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block main %}
+    <!-- Display table with history if user has any -->
+    {% if history %}
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Symbol</th>
+            <th scope="col">Shares</th>
+            <th scope="col">Price</th>
+            <th scope="col">Transacted</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for stock in history %}
+            <tr>
+                <td>{{ stock["history_symbol"] }}</td>
+                <td>{{ stock["history_shares"] }}</td>
+                <td>{{ stock["price"] | usd  }}</td>
+                <td>{{ stock["timestamp"]}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+{% endblock %}

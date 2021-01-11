@@ -1,0 +1,56 @@
+register
+    - When requested via GET, should display registration form
+    - When form is submitted via POST, insert the new user
+        into users table
+    - Be sure to check for invalid inputs,
+        and to hash the user's password
+    - Handle if username is already in db
+
+    - Redirect to index with 'Registered!' blue alert
+quote
+    - When requested via GET, should display form
+        to request a stock quote
+    - When form is submitted via POST, lookup the stock symbol
+        by calling the lookup function and display the results
+    - handle None from lookup
+
+    ex: A share of Apple, Inc. (AAPL) costs $235.48.
+buy
+    - When requested via GET, should display form to buy a stock
+    - When form is submitted via POST,
+        purchase the stock so long as the user can afford it
+    - Handle not enough funds
+    - add table to store buy informations:
+        id user, stock name, how many, and more info
+
+    - Redirect to index with 'Bought!' blue alert
+index
+    - Display a table with:
+        - Symbol
+        - Name
+        - Shares
+        - Price (new)
+        - Total (new)
+sell
+    - When requested via GET, should display a form to sell a stock
+        Display stock and amount of stock via carousels to limit
+    - When form is submitted via POST, sell the specified number
+        of shares of stock, and update the user's cash
+
+    - Redirect to index with 'Sold!' blue alert
+history
+    - Display a table with a history of all transaction's,
+        listing row by row every buy and every sell.
+
+    - Display a table with:
+        - Symbol
+        - Shares
+        - Price
+        - Transacted (ex:2019-10-18 14:33:53)
+personal touch
+    - Password strength via regex
+
+    possibilities:
+    - Allow users to change password
+    - Allow users to add cash
+    - Allow buying or selling stock from the index page

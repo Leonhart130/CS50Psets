@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {% if request.method == "GET" or invalid %}
+        Quote
+    {% else %}
+        Quoted
+    {% endif %}
+{% endblock %}
+
+<!-- If symbol is invalid -->
+{% block alert %}
+    {% if invalid %}
+        <div class="alert alert-primary text-center" role="alert">
+            Symbol is invalid
+        </div>
+    {% endif %}
+{% endblock %}
+
+
+{% block main %}
+    <!-- Form request quote -->
+    {% if request.method == "GET" or invalid %}
+        <form action="/quote" method="post">
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="symbol" placeholder="Symbol" type="text">
+            </div>
+            <button class="btn btn-primary" type="submit">Quote</button>
+        </form>
+    {% endif %}
+
+    <!-- If request had been submitted and return value is True -->
+    {% if success %}
+        <p>A share of {{ quote["name"] }} ({{ quote["symbol"] }}) costs ${{ quote["price"] }}.</p>
+    {% endif %}
+
+{% endblock %}
